@@ -13,9 +13,12 @@ spec:
       labels:
         app: guestbook-ui
     spec:
+      initContainers:
+        - name: init-delay
+          image: busybox
+          command: ["sh", "-c", "sleep 120"]
       containers:
-      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
-        name: guestbook-ui
-        randomField: "randomValue"
-        ports:
-        - containerPort: 80
+        - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+          name: guestbook-ui
+          ports:
+            - containerPort: 80
